@@ -1,24 +1,32 @@
 name: Java CI
+
 on:
- push:
- branches:
- - [Your Branch]
+  push:
+    branches:
+      - main  # 你可以修改为你的分支名
+  pull_request:
+    branches:
+      - main
+
 jobs:
- build:
- runs-on: ubuntu-latest
- steps:
- - name: Checkout code
- uses: actions/checkout@v3
- with:
- ref: ${{ github.event.pull_request.head.ref }}
- fetch-depth: ${{ env.PR_FETCH_DEPTH }}
- - name: Set up JDK
- uses: actions/setup-java@v1
- with:
- java-version: '11' # You can change this to the version 
-you want
- - name: Compile Java
- run: |
- cd [Your Branch]/HolidayTravelVehicles 
- javac -d . *.java
- # Compile java file from directory
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'  # 使用 Java 11
+
+      - name: Compile Java Code
+        run: |
+          cd HolidayTravelVehicles  # 进入包含 Java 代码的目录
+          javac -d out *.java  # 编译所有 Java 文件并存放在 out 目录
+
+      - name: Run Java Program
+        run: |
+          cd HolidayTravelVehicles
+          java -cp out Main  # 运行 Main.java
