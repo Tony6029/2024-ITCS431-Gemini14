@@ -24,6 +24,7 @@ jobs:
       - name: Compile Java Code
         run: |
           cd HolidayTravelVehicles  # 进入包含 Java 代码的目录
+          mkdir -p out  # 确保编译输出目录存在
           javac -d out *.java  # 编译所有 Java 文件并存放在 out 目录
 
       - name: Run Java Program
