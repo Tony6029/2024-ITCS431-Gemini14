@@ -3,7 +3,7 @@ name: Java CI
 on:
   push:
     branches:
-      - main  # 你可以修改为你的分支名
+      - main  
   pull_request:
     branches:
       - main
